@@ -20,7 +20,7 @@ export const useWebSocketCanvas = (panelId, fps = 30) => {
   useEffect(() => {
     if (!gl) return;
     
-    console.log(`Creating high-quality render target for ${panelId}`);
+    // console.log(`Creating high-quality render target for ${panelId}`);
     
     // Use higher resolution for better quality
     const targetWidth = 1024; // Increased from 512
@@ -38,7 +38,7 @@ export const useWebSocketCanvas = (panelId, fps = 30) => {
       anisotropy: 4 // Better texture quality
     });
     
-    console.log(`Created render target: ${targetWidth}x${targetHeight} for ${panelId}`);
+    // console.log(`Created render target: ${targetWidth}x${targetHeight} for ${panelId}`);
     
     return () => {
       if (renderTarget.current) {
@@ -56,7 +56,7 @@ export const useWebSocketCanvas = (panelId, fps = 30) => {
       socket.current = new WebSocket('ws://localhost:8080');
       
       socket.current.onopen = () => {
-        console.log(`WebSocket connected for ${panelId}`);
+        // console.log(`WebSocket connected for ${panelId}`);
         connected.current = true;
         
         // Send panel info to help receiver set up proper dimensions
@@ -70,16 +70,16 @@ export const useWebSocketCanvas = (panelId, fps = 30) => {
       };
       
       socket.current.onclose = () => {
-        console.log(`WebSocket disconnected for ${panelId}`);
+        // console.log(`WebSocket disconnected for ${panelId}`);
         connected.current = false;
       };
       
       socket.current.onerror = (error) => {
-        console.error(`WebSocket error for ${panelId}:`, error);
+        // console.error(`WebSocket error for ${panelId}:`, error);
         connected.current = false;
       };
     } catch (error) {
-      console.error(`Error setting up WebSocket for ${panelId}:`, error);
+      // console.error(`Error setting up WebSocket for ${panelId}:`, error);
     }
     
     return () => {
@@ -109,7 +109,7 @@ export const useWebSocketCanvas = (panelId, fps = 30) => {
         };
         
         domRef.current = findElement();
-        console.log(`Panel ${panelId} DOM element:`, domRef.current);
+        // console.log(`Panel ${panelId} DOM element:`, domRef.current);
       }, 500);
     }
   }, [panelId]);
@@ -117,7 +117,7 @@ export const useWebSocketCanvas = (panelId, fps = 30) => {
   // Function to capture and send the current canvas frame
   const sendFrame = () => {
     if (!socket.current || socket.current.readyState !== WebSocket.OPEN) {
-      console.log(`WebSocket not ready for ${panelId}`);
+      // console.log(`WebSocket not ready for ${panelId}`);
       return;
     }
     if (!connected.current) return;
@@ -199,7 +199,7 @@ export const useWebSocketCanvas = (panelId, fps = 30) => {
       
       // Verify the data looks valid
       if (!imageData64 || !imageData64.startsWith('data:image')) {
-        console.error('Generated invalid image data');
+        // console.error('Generated invalid image data');
         return;
       }
       
@@ -215,9 +215,9 @@ export const useWebSocketCanvas = (panelId, fps = 30) => {
         quality: 'high'
       }));
       
-      console.log(`Sent high-quality ${panelId} frame: ${width}x${height}`);
+      // console.log(`Sent high-quality ${panelId} frame: ${width}x${height}`);
     } catch (error) {
-      console.error('Error sending frame:', error);
+      // console.error('Error sending frame:', error);
     }
   };
   

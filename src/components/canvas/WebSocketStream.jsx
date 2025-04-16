@@ -12,13 +12,13 @@ export const WebSocketStream = ({ panelId, fps = 15 }) => {
 
     // Log FPS every 2 seconds for debugging
     useEffect(() => {
-        console.log(`❗ WebSocketStream initialized for ${panelId} at ${fps} FPS`)
+        // console.log(`❗ WebSocketStream initialized for ${panelId} at ${fps} FPS`)
 
         const interval = setInterval(() => {
             const now = Date.now()
             const elapsed = (now - lastFpsLog.current) / 1000
             if (elapsed > 0) {
-                console.log(`⚡ ${panelId} Stream: ${Math.round(frameCount.current / elapsed)} FPS`)
+                // console.log(`⚡ ${panelId} Stream: ${Math.round(frameCount.current / elapsed)} FPS`)
                 frameCount.current = 0
                 lastFpsLog.current = now
             }
@@ -26,11 +26,11 @@ export const WebSocketStream = ({ panelId, fps = 15 }) => {
 
         // Immediately send a test frame
         setTimeout(() => {
-            console.log(`⚡ Sending initial test frame for ${panelId}...`)
+            // console.log(`⚡ Sending initial test frame for ${panelId}...`)
             try {
                 sendFrame()
             } catch (error) {
-                console.error(`❌ Error sending initial test frame for ${panelId}:`, error)
+                // console.error(`❌ Error sending initial test frame for ${panelId}:`, error)
             }
         }, 1000)
 
@@ -59,17 +59,17 @@ export const WebSocketStream = ({ panelId, fps = 15 }) => {
                             // Mark this element for easier identification
                             parent.setAttribute('data-panel', panelId);
                             parent.classList.add(`${panelId}-panel`);
-                            console.log(`Found and marked ${panelId} panel:`, parent);
+                            // console.log(`Found and marked ${panelId} panel:`, parent);
                         }
                     }
                 });
             }, 200); // Small delay to ensure the DOM is ready
         } catch (error) {
-            console.error(`Error identifying panel elements:`, error);
+            // console.error(`Error identifying panel elements:`, error);
         }
 
         return () => {
-            console.log(`🛑 WebSocketStream for ${panelId} being cleaned up`)
+            // console.log(`🛑 WebSocketStream for ${panelId} being cleaned up`)
             clearInterval(interval)
             isActive.current = false
         }
@@ -83,7 +83,7 @@ export const WebSocketStream = ({ panelId, fps = 15 }) => {
             sendFrame()
             frameCount.current++
         } catch (error) {
-            console.error(`❌ Error in WebSocketStream for ${panelId}:`, error)
+            // console.error(`❌ Error in WebSocketStream for ${panelId}:`, error)
         }
     })
 

@@ -46,11 +46,7 @@ export const generateMockData = () => {
   // Sample mock data - simulates beacons being placed on the wall
   const mockObjects = [
     { id: 'star1', position: [0.2, 0.3], altitude: 0.1 }, // x, y as normalized coordinates (0-1)
-    { id: 'star2', position: [0.5, 0.4], altitude: 0.2 },
-    { id: 'star3', position: [0.8, 0.4], altitude: 0.15 },
     { id: 'flower1', position: [0.2, 0.7], altitude: 0.1 }, // x, y as normalized coordinates (0-1)
-    { id: 'flower2', position: [0.5, 0.7], altitude: 0.2 },
-    { id: 'flower3', position: [0.8, 0.7], altitude: 0.15 }
   ]
   
   // Register mock objects

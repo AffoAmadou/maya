@@ -19,9 +19,9 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
   ),
 })
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
-const Central = dynamic(() => import('@/components/canvas/central').then((mod) => mod.Central), { ssr: false })
-const LeftPanel = dynamic(() => import('@/components/canvas/leftPanel').then((mod) => mod.LeftPanel), { ssr: false })
-const RightPanel = dynamic(() => import('@/components/canvas/rightPanel').then((mod) => mod.RightPanel), { ssr: false })
+const Central = dynamic(() => import('@/components/canvas/center/central').then((mod) => mod.Central), { ssr: false })
+const LeftPanel = dynamic(() => import('@/components/canvas/left/leftPanel').then((mod) => mod.LeftPanel), { ssr: false })
+const RightPanel = dynamic(() => import('@/components/canvas/right/rightPanel').then((mod) => mod.RightPanel), { ssr: false })
 const WebSocketStream = dynamic(() => import('@/components/canvas/WebSocketStream').then((mod) => mod.WebSocketStream), { ssr: false })
 
 export default function Page() {
@@ -31,7 +31,7 @@ export default function Page() {
         <div className='mx-auto flex w-full max-w-6xl gap-2'>
           {/* left */}
           <div className='left-panel relative aspect-[73/140] w-1/5 bg-blue-300' id="left-panel" data-panel="left">
-            <View orbit className='absolute inset-0 size-full' panelId="left">
+            <View className='absolute inset-0 size-full' panelId="left">
               <Suspense fallback={null}>
                 <LeftPanel />
                 <WebSocketStream panelId="left" fps={10} />
@@ -53,7 +53,7 @@ export default function Page() {
 
           {/* right */}
           <div className='right-panel relative aspect-[73/140] w-1/5 bg-red-300' id="right-panel" data-panel="right">
-            <View orbit className='absolute inset-0 size-full' panelId="right">
+            <View className='absolute inset-0 size-full' panelId="right">
               <Suspense fallback={null}>
                 <RightPanel />
                 <WebSocketStream panelId="right" fps={10} />
@@ -62,7 +62,7 @@ export default function Page() {
             </View>
           </div>
         </div>
-      </div>
+      </div >
     </>
   )
 }

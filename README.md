@@ -2,13 +2,16 @@
 
 # :japanese_castle: React-Three-Next starter
 
-A minimalist starter for NextJS, @react-three/fiber and Threejs.
+A powerful starter for NextJS, @react-three/fiber and Threejs with advanced features and real-time capabilities.
 
 ![](https://user-images.githubusercontent.com/2223602/192515435-a3d2c1bb-b79a-428e-92e5-f44c97a54bf7.jpg)
 
 - TTL ~ 100ms
-- First load JS ~ 79kb
+- First load JS ~ 79kb
 - Lighthouse score of 100 (Performance, Accessibility, Best Practices, SEO)
+- Real-time WebSocket communication
+- State management with XState and Zustand
+- Advanced animation support with GSAP
 
 This starter allows you to navigate seamlessly between pages with dynamic dom and/or canvas content without reloading or creating a new canvas every time. 3D components are usable anywhere in the dom. The events, dom, viewport, everything is synchronized!
 
@@ -39,15 +42,38 @@ yarn create r3f-app next my-app -ts
 
 ### :mount_fuji: Features
 
-- [x] GLSL imports
+- [x] GLSL imports and shader support
 - [x] Canvas is not getting unmounted while navigating between pages
 - [x] Canvas components usable in any div of the page
 - [x] Based on the App directory architecture
 - [x] PWA Support
+- [x] Real-time WebSocket communication
+- [x] Advanced state management with XState and Zustand
+- [x] GSAP animations integration
+- [x] Processing.js client integration
+- [x] Express server for backend functionality
+- [x] WebSocket server for real-time communication
+- [x] Advanced GLSL utilities and random functions
 
 ### :bullettrain_side: Architecture
 
-Thanks to [tunnel-rat](https://github.com/pmndrs/tunnel-rat) the starter can portal components between separate renderers. Anything rendered inside the `<View/>` component of the starter will be rendered in the 3D Context. For better performances it uses gl.scissor to cut the viewport into segments.
+The project follows a modern architecture with several key components:
+
+1. **Frontend (Next.js + React Three Fiber)**
+   - App directory structure
+   - Canvas-based 3D rendering
+   - Real-time WebSocket communication
+   - State management with XState and Zustand
+
+2. **Backend (Express + WebSocket)**
+   - Express server for API endpoints
+   - WebSocket server for real-time communication
+   - Processing.js integration
+
+3. **3D Components**
+   - Uses tunnel-rat for portal components between renderers
+   - GLSL shader support
+   - Advanced animation capabilities with GSAP
 
 ```jsx
 <div className='relative'>
@@ -65,15 +91,33 @@ Thanks to [tunnel-rat](https://github.com/pmndrs/tunnel-rat) the starter can por
 - `yarn lint` - Audit code quality
 - `yarn build` - Next build
 - `yarn start` - Next start
+- `yarn server` - Start the Express and WebSocket server
 
 ### ⬛ Stack
 
 - [`create-r3f-app`](https://github.com/utsuboco/create-r3f-app) &ndash; Command line tool to simplify the installation.
 - [`threejs`](https://github.com/mrdoob/three.js/) &ndash; A lightweight, 3D library with a default WebGL renderer.
 - [`@react-three/fiber`](https://github.com/pmndrs/react-three-fiber) &ndash; A React renderer for Threejs on the web and react-native.
-- [`@react-three/drei` - Optional](https://github.com/pmndrs/drei) &ndash; useful helpers for react-three-fiber
-- [`@react-three/a11y` - Optional](https://github.com/pmndrs/react-three-a11y/) &ndash; Accessibility tools for React Three Fiber
-- [`r3f-perf` - Optional](https://github.com/RenaudRohlinger/r3f-perf) &ndash; Tool to easily monitor react threejs performances.
+- [`@react-three/drei`](https://github.com/pmndrs/drei) &ndash; Useful helpers for react-three-fiber
+- [`@react-three/a11y`](https://github.com/pmndrs/react-three-a11y/) &ndash; Accessibility tools for React Three Fiber
+- [`r3f-perf`](https://github.com/RenaudRohlinger/r3f-perf) &ndash; Tool to easily monitor react threejs performances.
+- [`XState`](https://xstate.js.org/) &ndash; State management and statecharts
+- [`Zustand`](https://github.com/pmndrs/zustand) &ndash; Lightweight state management
+- [`GSAP`](https://greensock.com/gsap/) &ndash; Professional-grade animation library
+- [`Express`](https://expressjs.com/) &ndash; Web server framework
+- [`WebSocket`](https://github.com/websockets/ws) &ndash; Real-time communication
+- [`Processing.js`](https://processingjs.org/) &ndash; Visual programming language integration
+
+### Project Structure
+
+```
+├── app/                 # Next.js app directory
+├── src/                 # Source files
+├── server/             # Express and WebSocket server
+├── processingClient/   # Processing.js client
+├── public/             # Static assets
+└── build/              # Build output
+```
 
 ### How to contribute :
 

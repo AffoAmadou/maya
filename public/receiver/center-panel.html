@@ -131,7 +131,7 @@
             const socket = new WebSocket(`ws://${hostname}:8080`);
             
             socket.addEventListener('open', function (event) {
-                console.log('Connected to WebSocket server');
+                // console.log('Connected to WebSocket server');
                 connectionStatus.classList.add('connected');
                 connectionText.textContent = 'Connected';
                 debugInfo.textContent = 'Waiting for frames...';
@@ -173,7 +173,7 @@
             });
             
             socket.addEventListener('close', function (event) {
-                console.log('Disconnected from WebSocket server');
+                // console.log('Disconnected from WebSocket server');
                 connectionStatus.classList.remove('connected');
                 connectionText.textContent = 'Disconnected';
                 debugInfo.textContent = 'Connection closed. Reconnecting in 3 seconds...';

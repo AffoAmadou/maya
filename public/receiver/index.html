@@ -212,7 +212,7 @@
             const socket = new WebSocket(`ws://${hostname}:8080`);
             
             socket.addEventListener('open', function (event) {
-                console.log('Connected to WebSocket server');
+                // console.log('Connected to WebSocket server');
                 connectionStatus.classList.add('connected');
                 connectionText.textContent = 'Connected';
                 debugInfo.textContent = 'Waiting for frames...';
@@ -221,13 +221,13 @@
             socket.addEventListener('message', function (event) {
                 try {
                     const message = JSON.parse(event.data);
-                    console.log(`Received message type: ${message.type}`);
+                    // console.log(`Received message type: ${message.type}`);
                     
                     if (message.type === 'frame') {
                         // Debug information about the frame, but don't log the entire data
                         const dataPreview = message.data ? message.data.substring(0, 50) + '...' : 'none';
-                        console.log(`Frame for ${message.panelId}, data length: ${message.data ? message.data.length : 'none'}`);
-                        console.log(`Data preview: ${dataPreview}`);
+                        // console.log(`Frame for ${message.panelId}, data length: ${message.data ? message.data.length : 'none'}`);
+                        // console.log(`Data preview: ${dataPreview}`);
                         
                         if (message.data && message.data.startsWith('data:image')) {
                             console.log(`Valid image data received for ${message.panelId}`);

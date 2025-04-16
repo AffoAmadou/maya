@@ -11,7 +11,7 @@ const clients = new Set();
 
 // Handle WebSocket connections
 wss.on('connection', (ws) => {
-  console.log('Client connected');
+  // console.log('Client connected');
   clients.add(ws);
 
   // Handle messages from clients
@@ -26,7 +26,7 @@ wss.on('connection', (ws) => {
         }
       });
     } catch (error) {
-      console.error('Error processing message:', error);
+      // console.error('Error processing message:', error);
     }
   });
 
@@ -40,5 +40,5 @@ wss.on('connection', (ws) => {
 // Start the server
 const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => {
-  console.log(`WebSocket server running on port ${PORT}`);
+  // console.log(`WebSocket server running on port ${PORT}`);
 }); 
