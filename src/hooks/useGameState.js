@@ -2,56 +2,38 @@ import { useMachine } from '@xstate/react';
 import { machine } from '../config/gameMachine';
 import { useEffect } from 'react';
 
-// Create a store to hold the state machine instance
-let sendFunction = null;
-let currentState = null;
-
 export const useGameState = () => {
   const [state, send] = useMachine(machine);
-  
-  // Store the send function and current state for external use
-  sendFunction = send;
-  currentState = state;
 
-  // Add effect to log state changes
+  // Monitora i cambiamenti di stato
   useEffect(() => {
-    console.log('Nuovo stato del gioco:', state.value);
+    console.log('Stato attuale:', state.value);
+    console.log('Contesto:', state.context);
   }, [state]);
 
-  const addFlowers = () => {
-    send({ type: 'FlowersAdded' });
+  const checkAssembling = (objects) => {
+    const sun = objects.find(obj => obj.id === 'sun');
+    const moon = objects.find(obj => obj.id === 'moon');
+
+    if (sun && moon) {
+      const distance = Math.sqrt(
+        Math.pow(sun.x - moon.x, 2) + 
+        Math.pow(sun.y - moon.y, 2)
+      );
+
+      console.log('Distanza:', distance); // Debug
+
+      if (distance < 0.1) {
+        console.log('Invio evento Assembling'); // Debug
+        send({ type: 'Assembling' });
+      }
+    }
   };
 
   return {
     state,
-    addFlowers,
-    isIntroduction: state.matches('Introduction'),
-    isDansingMoon: state.matches('DansingMoon'),
+    checkAssembling,
+    isPrelaunch: state.matches('Prelaunch'),
+    isIntroduction: state.matches('Introduction')
   };
-};
-
-// Export a function to trigger Assembling from anywhere
-export const triggerAssembling = () => {
-  if (sendFunction && currentState) {
-    console.log('Stato attuale:', currentState.value);
-    if (currentState.matches('Prelaunch')) {
-      console.log('Inviando evento Assembling...');
-      sendFunction({ type: 'Assembling' });
-    } else {
-      console.log('Non posso inviare Assembling: non sono in Prelaunch');
-    }
-  }
-};
-
-// Export a function to trigger FlowersAdded from anywhere
-export const triggerFlowersAdded = () => {
-  if (sendFunction && currentState) {
-    console.log('Stato attuale:', currentState.value);
-    if (currentState.matches('Introduction')) {
-      console.log('Inviando evento FlowersAdded...');
-      sendFunction({ type: 'FlowersAdded' });
-    } else {
-      console.log('Non posso inviare FlowersAdded: non sono in Introduction');
-    }
-  }
 }; 

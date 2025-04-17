@@ -42,7 +42,7 @@ export default function Page() {
 
           {/* central */}
           <div className='center-panel relative aspect-[3/2] w-3/5' id="center-panel" data-panel="center">
-            <View orbit className='absolute inset-0 size-full' panelId="center">
+            <View className='absolute inset-0 size-full' panelId="center">
               <Suspense fallback={null}>
                 <Central />
                 <WebSocketStream panelId="center" fps={15} />
